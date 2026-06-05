@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.0">
+    <title>Authentication Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+        <section class="registration-section">
+            <form action="#">
+                <header class="primary-header-form">
+                    <h2>School System Registration</h2>
+                    <p class="header-des">Fill in the Information requried</p>
+                    <div class="close-btn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </header>
+                <label for="school-logo-input">
+                    <input type="file" id="school-logo-input" style="display: none" />
+                    <p>Add school Logo</p>
+                </label>
+                <p>Logo uploaded successfully!</p>
+                <div class="schoolName-role">
+                    <div class="school-name">
+                        <p class="school-name-title">School Name</p>
+                        <input type="text" id="school-name-input" required />
+                    </div>
+                    <div class="role">
+                        <p class="role-title">Role</p>
+                        <select>
+                            <option value="" selected disabled>Select role</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Accountant">Accountant</option>
+                            <option value="Head Teacher">Head Teacher</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="username">
+                    <p class="username-title">Username</p>
+                    <input type="text" required />
+                </div>
+                <div class="email">
+                    <p class="email-title">Email</p>
+                    <input type="email" placeholder="example@gmail.com" required />
+                </div>
+                <div class="passwd-confirm">
+                    <div class="passwd">
+                        <p class="passwd-title">Password</p>
+                        <input type="password" required />
+                    </div>
+                    <div class="confirm">
+                        <p class="confirm-title">Confirm Password</p>
+                        <input type="password" required />
+                    </div>
+                </div>
+                <div class="showpasswd">
+                    <input type="checkbox" />
+                    <span>Show password</span>
+                </div>
+                <button type="submit" class="register-btn">register</button>
+                <div class="shift-to-login">
+                    <p>Already have an account? <a href="#" id="login-sec">login</a></p>
+                </div>
+            </form>
+        </section>
+        
+        <section class="login-section">
+            <form action="#">
+                <div class="secondary-header-form">
+                    <h2>Login</h2>
+                      <div class="close-btn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+                <div class="username">
+                    <p class="username-title">Username</p>
+                    <input type="text" required />
+                </div>
+                <div class="passwd">
+                    <p class="passwd-title">Password</p>
+                    <input type="password" required />
+                </div>
+                  <div class="showpasswd">
+                    <input type="checkbox" />
+                    <span>Show password</span>
+                </div>
+                <button type="submit" class="register-btn">Login</button>
+                <div class="shift-to-login">
+                    <p>Don't have an account? <a href="#" id="register-sec">register</a></p>
+                </div>
+            </form>
+        </section>
+</body>
+</html>
