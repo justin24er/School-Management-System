@@ -11,21 +11,24 @@
         <section class="registration-section">
             <form action="#">
                 <header class="primary-header-form">
-                    <h2>School System Registration</h2>
+                    <p class="heading">School System Registration</p>
                     <p class="header-des">Fill in the Information requried</p>
                     <div class="close-btn">
                         <i class="fa-solid fa-xmark"></i>
                     </div>
                 </header>
-                <label for="school-logo-input">
-                    <input type="file" id="school-logo-input" style="display: none" />
-                    <p>Add school Logo</p>
-                </label>
-                <p>Logo uploaded successfully!</p>
+                <div class="logo-input">
+                    <label for="school-logo-input">
+                        <input type="file" id="school-logo-input"  style="display: none"/>
+                        <i class="fa-solid fa-upload"></i>
+                        <p>Add school Logo</p>
+                    </label>
+                    <p aria-hidden="false">logo uploaded successfully! <i class="fa-solid fa-circle-check"></i></p>
+                </div>
                 <div class="schoolName-role">
                     <div class="school-name">
                         <p class="school-name-title">School Name</p>
-                        <input type="text" id="school-name-input" required />
+                        <input type="text" id="school-name-input" placeholder="example primary/secondary school" required />
                     </div>
                     <div class="role">
                         <p class="role-title">Role</p>
@@ -39,7 +42,7 @@
                 </div>
                 <div class="username">
                     <p class="username-title">Username</p>
-                    <input type="text" required />
+                    <input type="text" placeholder="codenest24" required />
                 </div>
                 <div class="email">
                     <p class="email-title">Email</p>
@@ -66,10 +69,10 @@
             </form>
         </section>
         
-        <section class="login-section">
+        <section class="login-section" style="display: none">
             <form action="#">
                 <div class="secondary-header-form">
-                    <h2>Login</h2>
+                    <p class="heading">Login</p>
                       <div class="close-btn">
                         <i class="fa-solid fa-xmark"></i>
                     </div>
