@@ -12,10 +12,10 @@
     <!--THE AUTHENTICATION PAGE DIVIDED INTO TWO(2) MAIN SECTIONS-->
 
     <!--section 1, (REGISTRATION SECTION)-->
-        <section class="registration-section">
+        <section class="registration-section"  aria-hidden="">
             <form action="#">
                 <header class="primary-header-form">
-                    <p class="heading">School System Registration</p>
+                    <p class="heading">School Management Registration</p>
                     <p class="header-des">Fill in the Information requried</p>
                     <div class="close-btn">
                         <i class="fa-solid fa-xmark"></i>
@@ -27,7 +27,7 @@
                         <i class="fa-solid fa-upload"></i>
                         <p>Add school Logo</p>
                     </label>
-                    <p aria-hidden="true">logo uploaded successfully! <i class="fa-solid fa-circle-check"></i></p>
+                    <p aria-hidden="false">logo uploaded successfully! <i class="fa-solid fa-circle-check"></i></p>
                 </div>
                 <div class="schoolName-role">
                     <div class="school-name">
@@ -67,27 +67,28 @@
                     <span>Show password</span>
                 </div>
                 <button type="submit" class="register-btn">register</button>
-                <div class="shift-to-login">
-                    <p>Already have an account? <a href="#" id="login-sec">login</a></p>
+                <div class="shift">
+                    <p>Already have an account? <a href="#" id="shift-sec">login</a></p>
                 </div>
             </form>
         </section>
        <!--section 1 ends here --> 
 
        <!--section 2 (LOGIN SECTION) and note: this section loads top(first)-->
-        <section class="login-section" style="display: none">
+        <section class="login-section" aria-hidden="true">
             <form action="#">
-                <div class="secondary-header-form">
-                    <p class="heading">Login</p>
+                <header class="secondary-header-form">
+                    <p class="heading">School Management Login</p>
+                    <p class="header-des">Fill required credentials</p>
                       <div class="close-btn">
                         <i class="fa-solid fa-xmark"></i>
                     </div>
-                </div>
+                </header>
                 <div class="username">
                     <p class="username-title">Username</p>
                     <input type="text" required />
                 </div>
-                <div class="passwd">
+                <div class="passwd passwd2">
                     <p class="passwd-title">Password</p>
                     <input type="password" required />
                 </div>
@@ -95,9 +96,9 @@
                     <input type="checkbox" />
                     <span>Show password</span>
                 </div>
-                <button type="submit" class="register-btn">Login</button>
-                <div class="shift-to-login">
-                    <p>Don't have an account? <a href="#" id="register-sec">register</a></p>
+                <button type="submit" class="register-btn">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                <div class="shift">
+                    <p>Don't have an account? <a href="#" id="shift-sec">register</a></p>
                 </div>
             </form>
         </section>
