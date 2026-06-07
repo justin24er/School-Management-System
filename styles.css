@@ -45,10 +45,12 @@ body,html {
     --fw-600: 600;
     --fw-700: 700;
 }
+
 ::placeholder {
     color: var(--african-turquise);
     filter: opacity(.5);
 }
+
 section[aria-hidden="true"] {
     display: none;
     z-index: -1;
@@ -56,18 +58,24 @@ section[aria-hidden="true"] {
 body {
     min-height: 100dvh;
     background-color: var(--full-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body::-webkit-scrollbar {
+    background: var(--silent-white);
+    width: .5rem;
+}
+body::-webkit-scrollbar-thumb {
+    background: var(--glossy-orange);
 }
 .registration-section,
 .login-section {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     font-family: var(--ff-primary);
     font-size: var(--fs-600);
     background-color: var(--silent-white);
     width: 500px;
-    max-width: 70vw;
+    max-width: 90vw;
     border-radius: 20px;
     box-shadow: 0 20px 30px #dddcdc;
 }
@@ -94,6 +102,9 @@ header {
     padding: 2px;
     border-radius: 5px;
     cursor: pointer;
+    @media (max-width: 643px) {
+        display: none;
+    }
 }
 header .heading {
     font-size: var(--fs-700);
@@ -120,6 +131,13 @@ label {
 .logo-input {
     display: flex;
     align-items: center;
+    @media (max-width: 592px) {
+        flex-direction: column;
+        align-items: start;
+        & p[aria-hidden] {
+            padding-inline-start: 20px;
+        }
+    }
 }
 label .fa-upload {
     font-size: var(--fs-700);
@@ -139,6 +157,11 @@ p[aria-hidden] {
     gap: 1rem;
     height: 4rem; 
     margin: 10px 20px 0 20px;
+    @media (max-width: 592px) {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        height: 9rem;
+    }
 }
 .school-name {
     display: flex;
@@ -217,6 +240,10 @@ p[aria-hidden] {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+    @media (max-width: 685px) {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
 }
 .passwd {
     display: flex;
@@ -326,4 +353,58 @@ button.register-btn:hover {
     color: var(--glossy-orange);
     font-weight: var(--fw-700);
     cursor: pointer;
+}
+
+
+/* MEDIA QUERIES */
+@media (max-width: 685px) {
+    .username,
+    .email,
+    .passwd,
+    .confirm{
+        height: 3.5rem;
+    }
+    .schoolName-role {
+        height: 8rem;
+    }
+    header {
+        padding-bottom: 10px;
+    }
+    header .heading {
+        font-size: 16px;
+    }
+    header p:nth-child(2) {font-size: 12px}
+    label {
+        margin-top: 16px;
+        padding: 10px;
+        font-size: 12px;
+    }
+    p[aria-hidden] {
+        font-size: 12px;
+    }
+    .school-name-title,
+    .role-title,
+    .username-title,
+    .email-title,
+    .passwd-title,
+    .confirm-title {
+        font-size: 13px;
+    }
+    .shift {
+        font-size: 12px;
+    }
+    .showpasswd {
+        font-size: 12px;
+    }
+    button.register-btn {
+        font-size: 14px;
+        height: 2.2rem;
+    }
+    .showpasswd input {
+        width: 16px;
+        height: 16px;
+        &::after {
+            font-size: 12px;
+        }
+    }
 }
