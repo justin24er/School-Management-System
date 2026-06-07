@@ -49,6 +49,10 @@ body,html {
     color: var(--african-turquise);
     filter: opacity(.5);
 }
+section[aria-hidden="true"] {
+    display: none;
+    z-index: -1;
+}
 body {
     min-height: 100dvh;
     background-color: var(--full-white);
@@ -166,7 +170,6 @@ p[aria-hidden] {
     border-radius: 10px;
     background: none;
     font-family: inherit;
-    filter: opacity(.5);
     font-size: var(--fs-500);
     & option {
         font-family: var(--ff-primary);
@@ -220,6 +223,9 @@ p[aria-hidden] {
     flex-direction: column;
     height: 4rem;
     gap: .3rem; 
+}
+.passwd2 {
+    margin: 10px 20px 0 20px;
 }
 .passwd input {
     flex-grow: 1;
@@ -309,12 +315,12 @@ button.register-btn:hover {
     background: var(--full-white);
     color: var(--afghan-tan);
 }
-.shift-to-login {
+.shift {
     margin: 10px 20px 20px 20px;
     color: var(--afghan-tan);
     text-align: center;
 }
-#login-sec {
+#shift-sec {
     text-decoration: none;
     text-transform: uppercase;
     color: var(--glossy-orange);
