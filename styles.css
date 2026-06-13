@@ -51,7 +51,7 @@ body,html {
     filter: opacity(.5);
 }
 
-section[aria-hidden="true"] {
+.display {
     display: none;
     z-index: -1;
 }
@@ -78,6 +78,8 @@ body::-webkit-scrollbar-thumb {
     max-width: 90vw;
     border-radius: 20px;
     box-shadow: 0 20px 30px #dddcdc;
+    opacity: 1;
+    transition: .3s;
 }
 .registration-section form,
 .login-section form {
@@ -347,7 +349,8 @@ button.register-btn:hover {
     color: var(--afghan-tan);
     text-align: center;
 }
-#shift-sec {
+#login-shift,
+#register-shift {
     text-decoration: none;
     text-transform: uppercase;
     color: var(--glossy-orange);
@@ -407,4 +410,11 @@ button.register-btn:hover {
             font-size: 12px;
         }
     }
+}
+
+.error-display {
+    margin: 10px 0 10px 20px;
+    font-size: 13px;
+    color: var(--glossy-orange);
+    font-weight: 600;
 }
