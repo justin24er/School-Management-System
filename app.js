@@ -97,10 +97,10 @@ function handleRegistration() {
         confirmInput.value === "" 
     ) {
         errorDisplay.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> fill all the credentials`;
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             errorDisplay.innerHTML = "";
         },2000)        
 
-        
+
     }
 }
