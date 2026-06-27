@@ -11,6 +11,7 @@ const notify = document.querySelector(".notify");
 const loginBtn = document.querySelector(".login-btn");
 
 const schoolLogo = document.getElementById("school-logo-input");
+const logoImg = document.getElementById("school-logo");
 const schoolName = document.getElementById("school-name-input");
 const roleInput = document.getElementById("role-select-input");
 const usernameInput = document.getElementById("username-input");
@@ -31,6 +32,18 @@ loginShift.addEventListener("click", () => {
     loginSection.classList.toggle("display")
 });
 
+
+/*--------------------------SCHOOL LOGO PROFILE HANDLING----------------------*/
+schoolLogo.addEventListener("change", function(){
+     logoImg.src = URL.createObjectURL(schoolLogo.files[0]);
+     logoImg.style.zIndex = '100';
+
+     notify.setAttribute("aria-hidden", "false");
+     setTimeout(() => {
+        notify.setAttribute("aria-hidden", "true");
+    },2000)
+});
+/*--------------------------SCHOOL LOGO PROFILE ENDS HERE---------------------*/
 
 /*-------------------------- CLOSE BUTTON SECTION --------------------------*/
 let timer = 1000;
