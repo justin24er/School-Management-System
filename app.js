@@ -117,3 +117,4 @@ function handleRegistration() {
 
     }
 }
+/*--THERE COMES A FULL AMMENDMENTS SECTION FROM SHOES PROJECT--*/

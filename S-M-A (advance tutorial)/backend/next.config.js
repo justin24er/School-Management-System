@@ -3,8 +3,6 @@ const nextConfig = {
   async headers() {
     return [
       {
-        // Allow the static frontend (served from a different origin during dev)
-        // to call the API with credentials. Restrict origin in production.
         source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
