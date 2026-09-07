@@ -1,0 +1,52 @@
+/* Additive only — nothing here overrides the preserved visual identity in
+   auth.css. It covers the handful of elements the original static template
+   didn't need: single-column school-name (role selection was removed from
+   public registration for security reasons), the trial-length note, MFA
+   code field, and status banners for async feedback. */
+
+.schoolName-role.single-col {
+    grid-template-columns: 1fr;
+    height: auto;
+}
+.trial-note {
+    margin: 6px 20px 0 20px;
+    font-size: var(--fs-500);
+    color: var(--authentic-grey);
+}
+.mfa-field {
+    margin: 10px 20px 0 20px;
+    height: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    display: none;
+}
+.mfa-field.show { display: flex; }
+.mfa-field input {
+    flex-grow: 1;
+    background: none;
+    border: 1px solid var(--authentic-grey);
+    border-radius: 10px;
+    padding-inline: 1rem;
+    outline: none;
+}
+.forgot-row {
+    margin: 6px 20px 0 20px;
+    text-align: right;
+}
+.forgot-row a {
+    color: var(--glossy-orange);
+    font-weight: var(--fw-600);
+    font-size: var(--fs-500);
+    cursor: pointer;
+}
+.success-display {
+    margin: 10px 0 10px 20px;
+    font-size: 13px;
+    color: #1E7C46;
+    font-weight: 600;
+}
+button.register-btn[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

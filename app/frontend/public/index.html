@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The School Management App</title>
+    <link rel="stylesheet" href="./css/auth.css" />
+    <link rel="stylesheet" href="./css/auth-overrides.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <!--- THE AUTHENTICATION PAGE DIVIDED INTO TWO(2) MAIN SECTIONS -->
+
+    <!-- section 1, (START TRIAL SECTION) — replaces the old open role-selecting registration -->
+     <section class="registration-section display">
+        <form id="trial-form">
+            <header class="primary-header-form">
+                <p class="heading">Start Your School's Free Trial</p>
+                <p class="header-des">30 days, full access, no card required</p>
+                <div class="close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </header>
+            <div class="logo-input">
+                <label for="school-logo-input">
+                    <div class="image-displayer">
+                        <img src="" id="school-logo" alt="school-logo" />
+                    </div>
+                    <input type="file"
+                            id="school-logo-input"
+                            style="display: none"
+                            accept="image/*"/>
+                    <i class="fa-solid fa-upload"></i>
+                    <p>Add school Logo (optional)</p>
+                </label>
+                <p class="notify" aria-hidden="true">Logo added &nbsp;<i class="fa-solid fa-circle-check"></i></p>
+            </div>
+            <div class="schoolName-role single-col">
+                <div class="school-name">
+                    <p class="school-name-title">School Name</p>
+                    <input type="text" id="school-name-input" placeholder="example primary/secondary school" />
+                </div>
+            </div>
+            <p class="trial-note">You'll be the School Executive Director for this account. You can invite your Head Teacher and Accountant after you sign in.</p>
+            <div class="username">
+                <p class="username-title">Your Username</p>
+                <input type="text" id="username-input" placeholder="codenest24" />
+            </div>
+            <div class="email">
+                <p class="email-title">Your Email</p>
+                <input type="email" id="email-input" placeholder="example@gmail.com" />
+            </div>
+            <div class="passwd-confirm">
+                <div class="passwd">
+                    <p class="passwd-title">Password</p>
+                    <input type="password" id="password-input" class="input-passwd" />
+                </div>
+                <div class="confirm">
+                    <p class="confirm-title">Confirm Password</p>
+                    <input type="password" id="confirm-input" class="input-passwd" />
+                </div>
+            </div>
+            <div class="showpasswd">
+                <input type="checkbox" id="showpasswd1"/>
+                <span>Show password</span>
+            </div>
+            <div class="error-display"></div>
+            <div class="success-display"></div>
+            <button type="submit" class="register-btn">Start Free Trial</button>
+            <div class="shift">
+                <p>Already have an account? <a href="#" id="login-shift">login</a></p>
+            </div>
+        </form>
+     </section>
+
+     <!--section 1 ends here-->
+
+     <!--section 2 (LOGIN SECTION) and note: this section loads top(first)-->
+     <section class="login-section">
+        <form id="login-form">
+            <header class="secondary-header-form">
+                <p class="heading">School Management Login</p>
+                <p class="header-des">Fill required credentials</p>
+                <div class="close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </header>
+            <div class="username">
+                <p class="username-title">Username or Email</p>
+                <input type="text" id="login-input" required/>
+            </div>
+            <div class="passwd passwd2">
+                <p class="passwd-title">Password</p>
+                <input type="password" id="input-passwd2" required/>
+            </div>
+            <div class="mfa-field" id="mfa-field">
+                <p class="passwd-title">Authentication Code</p>
+                <input type="text" id="mfa-input" inputmode="numeric" placeholder="6-digit code" />
+            </div>
+            <div class="showpasswd">
+                <input type="checkbox" id="showpasswd2"/>
+                <span>Show password</span>
+            </div>
+            <div class="forgot-row"><a id="forgot-link">Forgot password?</a></div>
+            <div class="error-display" id="login-error"></div>
+            <button type="submit" class="register-btn login-btn">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+            <div class="shift">
+                <p>Don't have an account? <a href="#" id="register-shift">Start a free trial</a></p>
+            </div>
+        </form>
+     </section>
+
+     <script src="/js/api.js"></script>
+     <script src="/js/auth.js"></script>
+</body>
+</html>
