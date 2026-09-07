@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform Admin — The School Management App</title>
+<link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">SM</div>
+      <div class="name">School Mgmt App<span>Platform Admin</span></div>
+    </div>
+    <nav id="sidebar-nav"></nav>
+    <div class="nav-footer">
+      <a class="nav-item" href="#" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>Platform overview</h1>
+        <p class="sub">Operational visibility across every registered school</p>
+      </div>
+      <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input placeholder="Search schools..." id="school-search"></div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi-card green"><div class="label">Total Schools</div><div class="value" id="kpi-total">—</div></div>
+      <div class="kpi-card champagne"><div class="label">Active / Trial</div><div class="value" id="kpi-active">—</div></div>
+      <div class="kpi-card blue"><div class="label">Total Students</div><div class="value" id="kpi-students">—</div></div>
+      <div class="kpi-card pink"><div class="label">Open Incidents</div><div class="value" id="kpi-incidents">—</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-head"><h2>School growth</h2><span class="meta">By month</span></div>
+        <canvas id="growth-chart" height="220"></canvas>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Schools by status</h2></div>
+        <canvas id="status-chart" height="220"></canvas>
+      </div>
+    </div>
+
+    <div class="panel" id="schools-panel">
+      <div class="panel-head"><h2>Registered schools</h2><span class="meta" id="schools-count"></span></div>
+      <div id="schools-table"><div class="loading-state">Loading schools...</div></div>
+    </div>
+
+    <div class="panel" id="security-panel">
+      <div class="panel-head"><h2>Recent security events</h2><span class="meta">Last 100</span></div>
+      <div id="security-table"><div class="loading-state">Loading...</div></div>
+    </div>
+  </main>
+
+  <aside class="right-rail">
+    <div class="profile-row">
+      <div class="bell"><i class="fa-solid fa-bell"></i></div>
+      <div class="who"><div class="name" id="who-name">—</div><div class="role" id="who-role">—</div></div>
+      <div class="avatar" id="avatar">–</div>
+    </div>
+
+    <div class="panel" style="margin-bottom:20px;">
+      <div class="panel-head"><h2>Issue a service voucher</h2></div>
+      <div class="form-inline" style="flex-direction:column; align-items:stretch;">
+        <select id="voucher-duration">
+          <option value="30">1 month</option>
+          <option value="90">3 months</option>
+          <option value="180">6 months</option>
+          <option value="365">12 months</option>
+        </select>
+        <button class="btn btn-primary" id="issue-voucher-btn" style="margin-top:8px;">Issue voucher</button>
+        <div id="voucher-result" style="font-size: var(--fs-300); margin-top:8px; color: var(--authentic-grey);"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Open incidents</h2></div>
+      <div id="incidents-list"><div class="loading-state">Loading...</div></div>
+    </div>
+  </aside>
+</div>
+
+<div class="modal-backdrop" id="school-modal-backdrop">
+  <div class="modal">
+    <h3 id="school-modal-title">School detail</h3>
+    <div id="school-modal-body"></div>
+    <div class="actions">
+      <button class="btn btn-outline" id="close-school-modal">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/dashboard-shell.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Overview — The School Management App</title>
+<link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">SM</div>
+      <div class="name"><span id="school-name-label">School</span><span>School Executive Director</span></div>
+    </div>
+    <nav id="sidebar-nav"></nav>
+    <div class="nav-footer">
+      <a class="nav-item" href="#" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div><h1>Executive overview</h1><p class="sub">Financial and operational performance at a glance</p></div>
+      <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input placeholder="Search records..."></div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi-card green"><div class="label">Revenue collected</div><div class="value" id="kpi-revenue">—</div></div>
+      <div class="kpi-card pink"><div class="label">Expenses</div><div class="value" id="kpi-expenses">—</div></div>
+      <div class="kpi-card champagne"><div class="label">Surplus</div><div class="value" id="kpi-profit">—</div></div>
+      <div class="kpi-card blue"><div class="label">Outstanding fees</div><div class="value" id="kpi-outstanding">—</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-head"><h2>Revenue vs expenses</h2><span class="meta">By month</span></div>
+        <canvas id="revenue-chart" height="220"></canvas>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Resource consumption</h2></div>
+        <canvas id="resource-chart" height="220"></canvas>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-head"><h2>Infrastructure projects</h2></div>
+        <canvas id="projects-chart" height="200"></canvas>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>School at a glance</h2></div>
+        <div id="glance-list"></div>
+      </div>
+    </div>
+  </main>
+
+  <aside class="right-rail">
+    <div class="profile-row">
+      <div class="bell"><i class="fa-solid fa-bell"></i></div>
+      <div class="who"><div class="name" id="who-name">—</div><div class="role" id="who-role">—</div></div>
+      <div class="avatar" id="avatar">–</div>
+    </div>
+
+    <div class="status-card" id="service-status-card"></div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Note</h2></div>
+      <p style="font-size: var(--fs-400); color: var(--authentic-grey);">
+        As Executive Director you have full visibility into school performance.
+        Day-to-day record entry is handled by the Head Teacher and Accountant.
+      </p>
+    </div>
+  </aside>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/dashboard-shell.js"></script>
+<script src="/js/sed.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Head Teacher — The School Management App</title>
+<link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">SM</div>
+      <div class="name"><span id="school-name-label">School</span><span>Head Teacher</span></div>
+    </div>
+    <nav id="sidebar-nav"></nav>
+    <div class="nav-footer">
+      <a class="nav-item" href="#" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div><h1>Academic & operations</h1><p class="sub">Students, teachers and academic performance</p></div>
+      <button class="btn btn-primary" id="add-student-btn"><i class="fa-solid fa-user-plus"></i> Add student</button>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi-card green"><div class="label">Active students</div><div class="value" id="kpi-students">—</div></div>
+      <div class="kpi-card champagne"><div class="label">Teachers</div><div class="value" id="kpi-teachers">—</div></div>
+      <div class="kpi-card blue"><div class="label">Subjects tracked</div><div class="value" id="kpi-subjects">—</div></div>
+      <div class="kpi-card pink"><div class="label">Active projects</div><div class="value" id="kpi-projects">—</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-head"><h2>Subject performance</h2><span class="meta">Average score</span></div>
+        <canvas id="subject-chart" height="220"></canvas>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Class performance</h2><span class="meta">Average score</span></div>
+        <canvas id="class-chart" height="220"></canvas>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-head"><h2>Annual trend</h2></div>
+        <canvas id="trend-chart" height="200"></canvas>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Resource & infrastructure spend</h2></div>
+        <div id="resource-list"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Students</h2><span class="meta" id="students-count"></span></div>
+      <div id="students-table"><div class="loading-state">Loading...</div></div>
+    </div>
+  </main>
+
+  <aside class="right-rail">
+    <div class="profile-row">
+      <div class="bell"><i class="fa-solid fa-bell"></i></div>
+      <div class="who"><div class="name" id="who-name">—</div><div class="role" id="who-role">—</div></div>
+      <div class="avatar" id="avatar">–</div>
+    </div>
+    <div class="status-card" id="service-status-card"></div>
+    <div class="panel">
+      <div class="panel-head"><h2>Infrastructure projects</h2></div>
+      <div id="projects-list"></div>
+    </div>
+  </aside>
+</div>
+
+<div class="modal-backdrop" id="add-student-modal">
+  <div class="modal">
+    <h3>Add student</h3>
+    <div class="field"><label>First name</label><input id="ns-first"></div>
+    <div class="field"><label>Last name</label><input id="ns-last"></div>
+    <div class="field"><label>Admission number</label><input id="ns-admission"></div>
+    <div class="field"><label>Gender</label>
+      <select id="ns-gender"><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select>
+    </div>
+    <div id="add-student-error" style="color:var(--pippin-ink); font-size: var(--fs-400); margin-bottom:8px;"></div>
+    <div class="actions">
+      <button class="btn btn-outline" id="add-student-cancel">Cancel</button>
+      <button class="btn btn-primary" id="add-student-save">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/dashboard-shell.js"></script>
+<script src="/js/head-teacher.js"></script>
+</body>
+</html>

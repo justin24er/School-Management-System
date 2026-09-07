@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accountant — The School Management App</title>
+<link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">SM</div>
+      <div class="name"><span id="school-name-label">School</span><span>Accountant</span></div>
+    </div>
+    <nav id="sidebar-nav"></nav>
+    <div class="nav-footer">
+      <a class="nav-item" href="#" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div><h1>Financial operations</h1><p class="sub">Fees, payments, expenses and enrollment</p></div>
+      <button class="btn btn-primary" id="record-payment-btn"><i class="fa-solid fa-money-bill"></i> Record payment</button>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi-card green"><div class="label">Fees collected</div><div class="value" id="kpi-collected">—</div></div>
+      <div class="kpi-card pink"><div class="label">Outstanding</div><div class="value" id="kpi-outstanding">—</div></div>
+      <div class="kpi-card blue"><div class="label">Enrolled this year</div><div class="value" id="kpi-enrolled">—</div></div>
+      <div class="kpi-card champagne"><div class="label">Fee records</div><div class="value" id="kpi-fee-records">—</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-head"><h2>Collections vs expenses</h2><span class="meta">By month</span></div>
+        <canvas id="collection-chart" height="220"></canvas>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Fee status</h2></div>
+        <canvas id="fee-status-chart" height="220"></canvas>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Recent payments</h2></div>
+      <div id="payments-table"><div class="loading-state">Loading...</div></div>
+    </div>
+  </main>
+
+  <aside class="right-rail">
+    <div class="profile-row">
+      <div class="bell"><i class="fa-solid fa-bell"></i></div>
+      <div class="who"><div class="name" id="who-name">—</div><div class="role" id="who-role">—</div></div>
+      <div class="avatar" id="avatar">–</div>
+    </div>
+    <div class="status-card" id="service-status-card"></div>
+    <div class="panel">
+      <div class="panel-head"><h2>Record an expense</h2></div>
+      <div class="field" style="margin-bottom:10px;"><select id="exp-category"></select></div>
+      <div class="field" style="margin-bottom:10px;"><input id="exp-description" placeholder="Description"></div>
+      <div class="field" style="margin-bottom:10px;"><input id="exp-amount" type="number" placeholder="Amount"></div>
+      <button class="btn btn-primary" id="save-expense-btn" style="width:100%;">Save expense</button>
+      <div id="expense-result" style="font-size: var(--fs-300); color: var(--authentic-grey); margin-top:8px;"></div>
+    </div>
+  </aside>
+</div>
+
+<div class="modal-backdrop" id="payment-modal">
+  <div class="modal">
+    <h3>Record payment</h3>
+    <div class="field"><label>Fee record</label><select id="pay-fee"></select></div>
+    <div class="field"><label>Amount</label><input id="pay-amount" type="number"></div>
+    <div class="field"><label>Method</label>
+      <select id="pay-method"><option value="cash">Cash</option><option value="bank">Bank</option><option value="mobile_money">Mobile money</option><option value="cheque">Cheque</option></select>
+    </div>
+    <div id="payment-error" style="color:var(--pippin-ink); font-size: var(--fs-400); margin-bottom:8px;"></div>
+    <div class="actions">
+      <button class="btn btn-outline" id="payment-cancel">Cancel</button>
+      <button class="btn btn-primary" id="payment-save">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/dashboard-shell.js"></script>
+<script src="/js/accountant.js"></script>
+</body>
+</html>
