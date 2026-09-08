@@ -17,7 +17,7 @@
       const months = Array.from(new Set([...data.monthlyRevenue.map(m => m.month), ...data.monthlyExpenses.map(m => m.month)])).sort();
       const revMap = Object.fromEntries(data.monthlyRevenue.map(m => [m.month, m.total]));
       const expMap = Object.fromEntries(data.monthlyExpenses.map(m => [m.month, m.total]));
-      new Chart(revCtx, {
+      renderChart('revenue-chart', revCtx, {
         type: 'bar',
         data: {
           labels: months,
@@ -34,7 +34,7 @@
     if (data.resourceSpend.every(r => r.total === 0) || data.resourceSpend.length === 0) {
       renderEmpty(resCtx.parentElement, 'No resource expenses recorded for this period.');
     } else {
-      new Chart(resCtx, {
+      renderChart('resource-chart', resCtx, {
         type: 'doughnut',
         data: {
           labels: data.resourceSpend.map(r => r.name),
@@ -48,7 +48,7 @@
     if (data.projects.length === 0) {
       renderEmpty(projCtx.parentElement, 'No infrastructure projects recorded.');
     } else {
-      new Chart(projCtx, {
+      renderChart('projects-chart', projCtx, {
         type: 'bar',
         data: { labels: data.projects.map(p => p.status), datasets: [{ label: 'Projects', data: data.projects.map(p => p.n), backgroundColor: '#E77F00' }] },
         options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { precision: 0 } } } },

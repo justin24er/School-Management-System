@@ -73,8 +73,8 @@ router.post('/start-trial',
         ['Water', 'resource'], ['Electricity', 'resource'], ['Maintenance', 'resource'],
         ['Supplies', 'operational'], ['Infrastructure', 'infrastructure'],
       ];
-      const insertCat = db.prepare('INSERT INTO expense_categories (school_id, name, kind) VALUES (?, ?, ?)');
-      for (const [name, kind] of categories) insertCat.run(schoolId, name, kind);
+      const insertCat = db.prepare('INSERT INTO expense_categories (public_id, school_id, name, kind) VALUES (?, ?, ?, ?)');
+      for (const [name, kind] of categories) insertCat.run(publicId('cat'), schoolId, name, kind);
 
       return { schoolId, userId };
     });

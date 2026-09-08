@@ -46,10 +46,10 @@ async function seedTestData() {
   }
 
   function makeMinimalSchoolData(schoolId, prefix) {
-    const classId = db.prepare('INSERT INTO classes (school_id, name, education_level) VALUES (?, ?, ?)')
-      .run(schoolId, 'Form 1', 'secondary').lastInsertRowid;
-    const subjectId = db.prepare('INSERT INTO subjects (school_id, name) VALUES (?, ?)')
-      .run(schoolId, 'Mathematics').lastInsertRowid;
+    const classId = db.prepare('INSERT INTO classes (public_id, school_id, name, education_level) VALUES (?, ?, ?, ?)')
+      .run(publicId('cls'), schoolId, 'Form 1', 'secondary').lastInsertRowid;
+    const subjectId = db.prepare('INSERT INTO subjects (public_id, school_id, name) VALUES (?, ?, ?)')
+      .run(publicId('sub'), schoolId, 'Mathematics').lastInsertRowid;
     const studentId = db.prepare(`
       INSERT INTO students (public_id, school_id, admission_no, first_name, last_name, class_id, gender)
       VALUES (?, ?, ?, 'Test', 'Student', ?, 'female')

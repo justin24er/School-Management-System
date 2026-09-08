@@ -86,20 +86,20 @@ async function main() {
     const cats = [['Water', 'resource'], ['Electricity', 'resource'], ['Maintenance', 'resource'],
       ['Supplies', 'operational'], ['Infrastructure', 'infrastructure']];
     for (const [name, kind] of cats) {
-      const info = db.prepare('INSERT INTO expense_categories (school_id, name, kind) VALUES (?, ?, ?)')
-        .run(schoolId, name, kind);
+      const info = db.prepare('INSERT INTO expense_categories (public_id, school_id, name, kind) VALUES (?, ?, ?, ?)')
+        .run(publicId('cat'), schoolId, name, kind);
       catIds[name] = info.lastInsertRowid;
     }
 
     const classNames = ['Form 1', 'Form 2', 'Form 3', 'Form 4'];
     const classIds = classNames.map(name =>
-      db.prepare('INSERT INTO classes (school_id, name, education_level) VALUES (?, ?, ?)')
-        .run(schoolId, name, 'secondary').lastInsertRowid
+      db.prepare('INSERT INTO classes (public_id, school_id, name, education_level) VALUES (?, ?, ?, ?)')
+        .run(publicId('cls'), schoolId, name, 'secondary').lastInsertRowid
     );
 
     const subjectNames = ['Mathematics', 'English', 'Kiswahili', 'Biology', 'Physics', 'Chemistry', 'Geography'];
     const subjectIds = subjectNames.map(name =>
-      db.prepare('INSERT INTO subjects (school_id, name) VALUES (?, ?)').run(schoolId, name).lastInsertRowid
+      db.prepare('INSERT INTO subjects (public_id, school_id, name) VALUES (?, ?, ?)').run(publicId('sub'), schoolId, name).lastInsertRowid
     );
 
     const firstNames = ['Asha', 'Juma', 'Neema', 'Baraka', 'Zawadi', 'Imani', 'Rehema', 'Elias', 'Faraja', 'Winnie'];

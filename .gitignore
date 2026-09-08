@@ -1,0 +1,70 @@
+# ---------------------------------------------------------------------
+# Environment files -- NEVER commit these. .env holds SESSION_SECRET and
+# the bootstrap Platform Admin password. Only .env.example (a template
+# with placeholder values) should ever be committed.
+# ---------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+app/backend/.env
+app/backend/.env.*
+!app/backend/.env.example
+
+# ---------------------------------------------------------------------
+# Node.js dependencies -- reinstalled via `npm install`, never committed.
+# ---------------------------------------------------------------------
+node_modules/
+app/backend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+
+# ---------------------------------------------------------------------
+# Database -- the SQLite file is generated locally by `npm run migrate`
+# and `npm run seed`; it's a build artifact, not source, and it will
+# contain real data (student/staff/financial records) once you're using
+# the app for real, which must never end up in version control.
+# ---------------------------------------------------------------------
+app/backend/data/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# ---------------------------------------------------------------------
+# Logs
+# ---------------------------------------------------------------------
+app/backend/logs/
+*.log
+
+# ---------------------------------------------------------------------
+# Uploaded files (school logos, etc.) -- user-generated content, not
+# source. Keep the directory itself if you add a .gitkeep, but not what's
+# uploaded into it.
+# ---------------------------------------------------------------------
+app/backend/uploads/*
+!app/backend/uploads/.gitkeep
+
+# ---------------------------------------------------------------------
+# Test artifacts
+# ---------------------------------------------------------------------
+coverage/
+*.tmp
+
+# ---------------------------------------------------------------------
+# Editor / IDE
+# ---------------------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# ---------------------------------------------------------------------
+# OS files
+# ---------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini

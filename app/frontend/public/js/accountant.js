@@ -18,7 +18,7 @@
         const months = Array.from(new Set([...data.collectionTrend.map(m => m.month), ...data.expenseTrend.map(m => m.month)])).sort();
         const collMap = Object.fromEntries(data.collectionTrend.map(m => [m.month, m.total]));
         const expMap = Object.fromEntries(data.expenseTrend.map(m => [m.month, m.total]));
-        new Chart(collCtx, {
+        renderChart('collection-chart', collCtx, {
           type: 'line',
           data: {
             labels: months,
@@ -36,7 +36,7 @@
         renderEmpty(statusCtx.parentElement, 'No fee records yet.');
       } else {
         const colors = { paid: '#DDFBE8', partial: '#FAF0DC', unpaid: '#FFDFDF', waived: '#DEE6FB' };
-        new Chart(statusCtx, {
+        renderChart('fee-status-chart', statusCtx, {
           type: 'doughnut',
           data: { labels: data.feesByStatus.map(f => f.status), datasets: [{ data: data.feesByStatus.map(f => f.n), backgroundColor: data.feesByStatus.map(f => colors[f.status] || '#ccc') }] },
           options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 } } } } },
@@ -79,9 +79,9 @@
   const modal = document.getElementById('payment-modal');
   document.getElementById('record-payment-btn').addEventListener('click', async () => {
     await loadFeeOptions();
-    modal.classList.add('show');
+    openModal(modal);
   });
-  document.getElementById('payment-cancel').addEventListener('click', () => modal.classList.remove('show'));
+  document.getElementById('payment-cancel').addEventListener('click', () => closeModal(modal));
   document.getElementById('payment-save').addEventListener('click', async () => {
     const errorEl = document.getElementById('payment-error');
     errorEl.textContent = '';
@@ -93,7 +93,7 @@
         amount: Number(document.getElementById('pay-amount').value),
         method: document.getElementById('pay-method').value,
       });
-      modal.classList.remove('show');
+      closeModal(modal);
       document.getElementById('pay-amount').value = '';
       loadDashboard();
     } catch (err) {

@@ -50,3 +50,123 @@ button.register-btn[disabled] {
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+/* ---------- Dark mode ----------
+   auth.css uses --full-white for TWO different roles: as a light surface
+   color in a few places, but ALSO as literal white foreground (the
+   register button's text, the show-password checkmark icon). Remapping
+   --full-white itself for dark mode -- what an earlier pass here did --
+   silently breaks those "must stay white" usages (button text goes dark
+   on a dark-orange button, checkmark disappears). auth.css also never set
+   a base text `color` on body at all, so headings and labels were plain
+   browser-default black regardless of theme -- the actual cause of
+   "toggled the background but forgot the font colour".
+   Fixed here by: only remapping --silent-white (auth.css only ever uses
+   it as a surface color, so it's safe), and explicit selector overrides
+   for every other surface/text color that needs to change. --full-white,
+   --army-black and the button/icon foreground colors are left alone. */
+[data-theme="dark"] {
+    --silent-white: #1B160F;
+    --afghan-tan: #D98A2B;
+    --glossy-orange: #FF9A3D;
+}
+
+[data-theme="dark"] body {
+    background-color: #100D08;
+}
+
+[data-theme="dark"] .registration-section,
+[data-theme="dark"] .login-section {
+    background-color: var(--silent-white);
+    color: #F3EBDD;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(217, 138, 43, 0.08);
+}
+[data-theme="dark"] .registration-section form,
+[data-theme="dark"] .login-section form,
+[data-theme="dark"] header {
+    border-color: #3A2E1F;
+}
+[data-theme="dark"] label {
+    background: #241C12;
+}
+[data-theme="dark"] .image-displayer::after {
+    background: #241C12;
+}
+[data-theme="dark"] .username input,
+[data-theme="dark"] .email input,
+[data-theme="dark"] .passwd input,
+[data-theme="dark"] .confirm input,
+[data-theme="dark"] .school-name input,
+[data-theme="dark"] .mfa-field input,
+[data-theme="dark"] .showpasswd input {
+    border-color: #3A2E1F;
+}
+[data-theme="dark"] button.register-btn:hover {
+    background: var(--silent-white);
+    color: var(--afghan-tan);
+    border-color: rgba(217, 138, 43, 0.5);
+}
+[data-theme="dark"] .theme-toggle-auth {
+    background: var(--silent-white);
+    color: #F3EBDD;
+    border-color: #3A2E1F;
+}
+[data-theme="dark"] .theme-toggle-auth:hover {
+    background: #241C12;
+}
+
+/* ---------- Visual polish (applies in both themes) ----------
+   Subtle, additive refinements on top of the preserved layout: a warmer
+   layered shadow instead of the flat grey default, a gentle entrance
+   animation when a form becomes visible, and real focus states on inputs
+   (the original template had none). Nothing here changes spacing,
+   proportions, or the core identity. */
+.registration-section, .login-section {
+    box-shadow: 0 24px 60px rgba(132, 79, 11, 0.12), 0 4px 12px rgba(24, 21, 19, 0.06);
+    animation: auth-card-in .4s cubic-bezier(.22, 1, .36, 1);
+    transition: background-color .25s ease, color .25s ease, box-shadow .25s ease;
+}
+@keyframes auth-card-in {
+    from { opacity: 0; transform: translateY(10px) scale(.98); }
+    to   { opacity: 1; transform: none; }
+}
+.username input, .email input, .passwd input, .confirm input,
+.school-name input, .mfa-field input {
+    transition: border-color .15s ease, box-shadow .15s ease, background-color .2s ease;
+}
+.username input:focus, .email input:focus, .passwd input:focus, .confirm input:focus,
+.school-name input:focus, .mfa-field input:focus {
+    border-color: var(--glossy-orange);
+    box-shadow: 0 0 0 3px rgba(231, 127, 0, 0.15);
+    outline: none;
+}
+button.register-btn {
+    box-shadow: 0 10px 24px rgba(132, 79, 11, 0.28);
+    transition: background-color .2s ease, color .2s ease, box-shadow .2s ease, transform .15s ease;
+}
+button.register-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(132, 79, 11, 0.16);
+}
+button.register-btn:active {
+    transform: translateY(0);
+}
+
+.theme-toggle-auth {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--authentic-grey);
+    background: var(--full-white);
+    color: var(--army-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    font-size: 16px;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.theme-toggle-auth:hover { background: var(--silent-white); }
