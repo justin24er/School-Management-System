@@ -1,4 +1,4 @@
-# The School Management App : Internal / Developer Documentation
+<h1 align="center"><strong> The School Management App : Internal / Developer Documentation </strong></h1>
 
 This document describes what is actually implemented in this codebase. It is
 for internal admin, developer, and preview use only. Do not distribute this
