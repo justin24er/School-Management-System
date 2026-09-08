@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  // Applied before first paint to avoid a flash of the wrong theme.
+  (function(){var t=localStorage.getItem('sma-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Head Teacher — The School Management App</title>
@@ -37,18 +41,18 @@
     <div class="two-col">
       <div class="panel">
         <div class="panel-head"><h2>Subject performance</h2><span class="meta">Average score</span></div>
-        <canvas id="subject-chart" height="220"></canvas>
+        <div class="chart-box"><canvas id="subject-chart"></canvas></div>
       </div>
       <div class="panel">
         <div class="panel-head"><h2>Class performance</h2><span class="meta">Average score</span></div>
-        <canvas id="class-chart" height="220"></canvas>
+        <div class="chart-box"><canvas id="class-chart"></canvas></div>
       </div>
     </div>
 
     <div class="two-col">
       <div class="panel">
         <div class="panel-head"><h2>Annual trend</h2></div>
-        <canvas id="trend-chart" height="200"></canvas>
+        <div class="chart-box"><canvas id="trend-chart"></canvas></div>
       </div>
       <div class="panel">
         <div class="panel-head"><h2>Resource & infrastructure spend</h2></div>
@@ -58,12 +62,24 @@
 
     <div class="panel">
       <div class="panel-head"><h2>Students</h2><span class="meta" id="students-count"></span></div>
+      <div class="filter-bar">
+        <div class="search-box filter-search"><i class="fa-solid fa-magnifying-glass"></i><input placeholder="Search by name or admission number..." id="student-search"></div>
+        <select id="student-filter-class"><option value="">All classes</option></select>
+        <select id="student-filter-status">
+          <option value="">All statuses</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+          <option value="graduated">Graduated</option>
+          <option value="withdrawn">Withdrawn</option>
+        </select>
+      </div>
       <div id="students-table"><div class="loading-state">Loading...</div></div>
     </div>
   </main>
 
   <aside class="right-rail">
     <div class="profile-row">
+      <button class="theme-btn" id="theme-toggle" title="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
       <div class="bell"><i class="fa-solid fa-bell"></i></div>
       <div class="who"><div class="name" id="who-name">—</div><div class="role" id="who-role">—</div></div>
       <div class="avatar" id="avatar">–</div>
@@ -82,6 +98,7 @@
     <div class="field"><label>First name</label><input id="ns-first"></div>
     <div class="field"><label>Last name</label><input id="ns-last"></div>
     <div class="field"><label>Admission number</label><input id="ns-admission"></div>
+    <div class="field"><label>Class</label><select id="ns-class"><option value="">Unassigned</option></select></div>
     <div class="field"><label>Gender</label>
       <select id="ns-gender"><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select>
     </div>

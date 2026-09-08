@@ -24,6 +24,7 @@ router.get('/students', requirePermission(PERMISSIONS.STUDENTS_READ), (req, res)
   const { page, pageSize, offset } = paginate(req);
   const search = req.query.search ? `%${req.query.search}%` : null;
   const status = req.query.status || null;
+  const classPublicId = req.query.classId || null;
 
   let where = 'WHERE s.school_id = ?';
   const params = [req.schoolId];
@@ -32,6 +33,7 @@ router.get('/students', requirePermission(PERMISSIONS.STUDENTS_READ), (req, res)
     params.push(search, search, search);
   }
   if (status) { where += ' AND s.status = ?'; params.push(status); }
+  if (classPublicId) { where += ' AND c.public_id = ?'; params.push(classPublicId); }
 
   const rows = db.prepare(`
     SELECT s.public_id, s.first_name, s.last_name, s.admission_no, s.status, s.gender,
@@ -40,7 +42,9 @@ router.get('/students', requirePermission(PERMISSIONS.STUDENTS_READ), (req, res)
     ${where} ORDER BY s.last_name, s.first_name LIMIT ? OFFSET ?
   `).all(...params, pageSize, offset);
 
-  const total = db.prepare(`SELECT COUNT(*) AS n FROM students s ${where}`).get(...params).n;
+  const total = db.prepare(`
+    SELECT COUNT(*) AS n FROM students s LEFT JOIN classes c ON c.id = s.class_id ${where}
+  `).get(...params).n;
   res.json({ data: rows, page, pageSize, total });
 });
 
@@ -119,10 +123,11 @@ router.post('/classes', requirePermission(PERMISSIONS.ACADEMICS_MANAGE), validat
   name: Joi.string().trim().min(1).max(100).required(),
   educationLevel: Joi.string().valid('primary', 'secondary').required(),
 })), (req, res) => {
-  db.prepare('INSERT INTO classes (school_id, name, education_level) VALUES (?, ?, ?)')
-    .run(req.schoolId, req.body.name, req.body.educationLevel);
+  const classPublicId = publicId('cls');
+  db.prepare('INSERT INTO classes (public_id, school_id, name, education_level) VALUES (?, ?, ?, ?)')
+    .run(classPublicId, req.schoolId, req.body.name, req.body.educationLevel);
   auditService.record({ actorUserId: req.user.id, schoolId: req.schoolId, action: 'class.created', newValue: req.body });
-  res.status(201).json({ message: 'Class created.' });
+  res.status(201).json({ publicId: classPublicId });
 });
 
 router.get('/subjects', requirePermission(PERMISSIONS.SCHOOL_READ), (req, res) => {
@@ -132,9 +137,10 @@ router.get('/subjects', requirePermission(PERMISSIONS.SCHOOL_READ), (req, res) =
 router.post('/subjects', requirePermission(PERMISSIONS.ACADEMICS_MANAGE), validateBody(Joi.object({
   name: Joi.string().trim().min(1).max(100).required(),
 })), (req, res) => {
-  db.prepare('INSERT INTO subjects (school_id, name) VALUES (?, ?)').run(req.schoolId, req.body.name);
+  const subjectPublicId = publicId('sub');
+  db.prepare('INSERT INTO subjects (public_id, school_id, name) VALUES (?, ?, ?)').run(subjectPublicId, req.schoolId, req.body.name);
   auditService.record({ actorUserId: req.user.id, schoolId: req.schoolId, action: 'subject.created', newValue: req.body });
-  res.status(201).json({ message: 'Subject created.' });
+  res.status(201).json({ publicId: subjectPublicId });
 });
 
 // -----------------------------------------------------------------------

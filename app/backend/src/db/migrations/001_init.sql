@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS password_reset_tokens (
 -- ---------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS classes (
     id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    public_id      TEXT UNIQUE NOT NULL,
     school_id      INTEGER NOT NULL REFERENCES schools(id) ON DELETE CASCADE,
     name           TEXT NOT NULL,          -- e.g. "Form 2", "Standard 5"
     education_level TEXT,                  -- primary / secondary
@@ -108,6 +109,7 @@ CREATE INDEX IF NOT EXISTS idx_classes_school ON classes(school_id);
 
 CREATE TABLE IF NOT EXISTS subjects (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    public_id   TEXT UNIQUE NOT NULL,
     school_id   INTEGER NOT NULL REFERENCES schools(id) ON DELETE CASCADE,
     name        TEXT NOT NULL,
     created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
@@ -200,6 +202,7 @@ CREATE INDEX IF NOT EXISTS idx_payments_school ON payments(school_id);
 
 CREATE TABLE IF NOT EXISTS expense_categories (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    public_id   TEXT UNIQUE NOT NULL,
     school_id   INTEGER NOT NULL REFERENCES schools(id) ON DELETE CASCADE,
     name        TEXT NOT NULL,          -- e.g. Water, Electricity, Maintenance, Supplies, Infrastructure
     kind        TEXT NOT NULL DEFAULT 'operational' CHECK (kind IN ('operational','resource','infrastructure')),

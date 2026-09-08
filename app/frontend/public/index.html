@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  (function(){var t=localStorage.getItem('sma-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The School Management App</title>
@@ -9,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <button class="theme-toggle-auth" id="theme-toggle" title="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
 
     <!--- THE AUTHENTICATION PAGE DIVIDED INTO TWO(2) MAIN SECTIONS -->
 
@@ -112,6 +116,7 @@
      </section>
 
      <script src="/js/api.js"></script>
+    <script src="/js/theme.js"></script>
      <script src="/js/auth.js"></script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  // Applied before first paint to avoid a flash of the wrong theme.
+  (function(){var t=localStorage.getItem('sma-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accountant — The School Management App</title>
@@ -37,11 +41,11 @@
     <div class="two-col">
       <div class="panel">
         <div class="panel-head"><h2>Collections vs expenses</h2><span class="meta">By month</span></div>
-        <canvas id="collection-chart" height="220"></canvas>
+        <div class="chart-box"><canvas id="collection-chart"></canvas></div>
       </div>
       <div class="panel">
         <div class="panel-head"><h2>Fee status</h2></div>
-        <canvas id="fee-status-chart" height="220"></canvas>
+        <div class="chart-box"><canvas id="fee-status-chart"></canvas></div>
       </div>
     </div>
 
@@ -53,6 +57,7 @@
 
   <aside class="right-rail">
     <div class="profile-row">
+      <button class="theme-btn" id="theme-toggle" title="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
       <div class="bell"><i class="fa-solid fa-bell"></i></div>
       <div class="who"><div class="name" id="who-name">—</div><div class="role" id="who-role">—</div></div>
       <div class="avatar" id="avatar">–</div>
@@ -60,9 +65,9 @@
     <div class="status-card" id="service-status-card"></div>
     <div class="panel">
       <div class="panel-head"><h2>Record an expense</h2></div>
-      <div class="field" style="margin-bottom:10px;"><select id="exp-category"></select></div>
-      <div class="field" style="margin-bottom:10px;"><input id="exp-description" placeholder="Description"></div>
-      <div class="field" style="margin-bottom:10px;"><input id="exp-amount" type="number" placeholder="Amount"></div>
+      <div class="field"><label for="exp-category">Category</label><select id="exp-category"></select></div>
+      <div class="field"><label for="exp-description">Description</label><input id="exp-description" placeholder="e.g. Water bill, June"></div>
+      <div class="field"><label for="exp-amount">Amount</label><input id="exp-amount" type="number" placeholder="0.00"></div>
       <button class="btn btn-primary" id="save-expense-btn" style="width:100%;">Save expense</button>
       <div id="expense-result" style="font-size: var(--fs-300); color: var(--authentic-grey); margin-top:8px;"></div>
     </div>

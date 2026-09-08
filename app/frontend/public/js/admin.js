@@ -2,8 +2,6 @@
   const me = await initShell('PLATFORM_ADMIN');
   if (!me) return;
 
-  let growthChart, statusChart;
-
   async function loadSummary() {
     try {
       const [summary, health] = await Promise.all([
@@ -20,12 +18,8 @@
       const growthCtx = document.getElementById('growth-chart');
       if (summary.schoolGrowth.length === 0) {
         renderEmpty(growthCtx.parentElement, 'No schools registered yet.');
-      } else if (growthChart) {
-        growthChart.data.labels = summary.schoolGrowth.map(g => g.month);
-        growthChart.data.datasets[0].data = summary.schoolGrowth.map(g => g.n);
-        growthChart.update();
       } else {
-        growthChart = new Chart(growthCtx, {
+        renderChart('growth-chart', growthCtx, {
           type: 'line',
           data: {
             labels: summary.schoolGrowth.map(g => g.month),
@@ -40,8 +34,7 @@
         renderEmpty(statusCtx.parentElement, 'No schools registered yet.');
       } else {
         const colors = { trial: '#FAF0DC', active: '#DDFBE8', expiring_soon: '#FFE2B5', expired: '#FFDFDF', frozen: '#BBB7AD', grace_period: '#DEE6FB', suspended: '#844F0B', cancelled: '#181513' };
-        if (statusChart) statusChart.destroy();
-        statusChart = new Chart(statusCtx, {
+        renderChart('status-chart', statusCtx, {
           type: 'doughnut',
           data: {
             labels: summary.byStatus.map(s => s.status.replace('_', ' ')),
@@ -112,7 +105,7 @@
     const body = document.getElementById('school-modal-body');
     document.getElementById('school-modal-title').textContent = name;
     body.innerHTML = '<div class="loading-state">Loading...</div>';
-    backdrop.classList.add('show');
+    openModal(backdrop);
 
     try {
       const detail = await API.get(`/api/admin/schools/${publicId}`);
@@ -136,13 +129,13 @@
         const reason = prompt('Reason for freezing this school (required, for the audit log):');
         if (!reason) return;
         await API.post(`/api/admin/schools/${publicId}/freeze`, { reason });
-        backdrop.classList.remove('show');
+        closeModal(backdrop);
         loadSchools();
       });
       const unfreezeBtn = document.getElementById('unfreeze-btn');
       if (unfreezeBtn) unfreezeBtn.addEventListener('click', async () => {
         await API.post(`/api/admin/schools/${publicId}/unfreeze`, { extendDays: 30 });
-        backdrop.classList.remove('show');
+        closeModal(backdrop);
         loadSchools();
       });
     } catch (err) {
@@ -151,7 +144,7 @@
   }
 
   document.getElementById('close-school-modal').addEventListener('click', () => {
-    document.getElementById('school-modal-backdrop').classList.remove('show');
+    closeModal(document.getElementById('school-modal-backdrop'));
   });
 
   document.getElementById('issue-voucher-btn').addEventListener('click', async () => {

@@ -60,6 +60,8 @@ function formatMoney(n) {
 }
 
 async function initShell(requiredRole) {
+  initThemeToggle();
+
   let me;
   try {
     me = await API.get('/api/auth/me');
@@ -136,4 +138,84 @@ function renderLoading(container, message = 'Loading...') {
 }
 function renderError(container, message = 'Unable to load this information right now.') {
   container.innerHTML = `<div class="error-state">${message}</div>`;
+}
+
+/* Chart.js binds a Chart instance to a <canvas> element; creating a second
+   chart on the same canvas without destroying the first throws "Canvas is
+   already in use." Dashboards reload their data (and therefore re-draw
+   their charts) after every write action, e.g. adding a student or
+   recording a payment — so every chart on every dashboard must go through
+   this helper instead of calling `new Chart(...)` directly. `key` just
+   needs to be unique per chart on the page (e.g. the canvas id). */
+const _chartRegistry = {};
+function renderChart(key, ctx, config) {
+  if (_chartRegistry[key]) {
+    _chartRegistry[key].destroy();
+  }
+  const merged = {
+    ...config,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      ...(config.options || {}),
+    },
+  };
+  _chartRegistry[key] = new Chart(ctx, merged);
+  return _chartRegistry[key];
+}
+
+/* ---------------------------------------------------------------------
+   Dark mode: a single data-theme attribute on <html>, persisted in
+   localStorage, read/written by every page that includes this file. The
+   inline script in each page's <head> already applies the saved theme
+   before first paint (see the snippet at the top of each HTML file) so
+   there is no flash of the wrong theme — this just wires up the toggle
+   button and keeps it in sync if the user switches.
+--------------------------------------------------------------------- */
+const THEME_KEY = 'sma-theme';
+
+function getTheme() {
+  return localStorage.getItem(THEME_KEY) || 'light';
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem(THEME_KEY, theme);
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.innerHTML = theme === 'dark'
+    ? '<i class="fa-solid fa-sun"></i>'
+    : '<i class="fa-solid fa-moon"></i>';
+}
+
+function initThemeToggle() {
+  setTheme(getTheme());
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+  });
+}
+
+/* ---------------------------------------------------------------------
+   Modal open/close with a small scale+fade animation. The animation
+   itself lives in dashboard.css (.modal-backdrop.show, .modal.closing);
+   this just sequences the classes correctly — "closing" has to be added
+   and then the backdrop removed only after the animation finishes,
+   otherwise the modal just vanishes instantly instead of animating out.
+--------------------------------------------------------------------- */
+const MODAL_CLOSE_MS = 180;
+
+function openModal(backdrop) {
+  const box = backdrop.querySelector('.modal');
+  if (box) box.classList.remove('closing');
+  backdrop.classList.add('show');
+}
+
+function closeModal(backdrop) {
+  const box = backdrop.querySelector('.modal');
+  if (box) box.classList.add('closing');
+  setTimeout(() => {
+    backdrop.classList.remove('show');
+    if (box) box.classList.remove('closing');
+  }, MODAL_CLOSE_MS);
 }

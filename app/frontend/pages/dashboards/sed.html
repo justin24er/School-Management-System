@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  // Applied before first paint to avoid a flash of the wrong theme.
+  (function(){var t=localStorage.getItem('sma-theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Executive Overview — The School Management App</title>
@@ -37,18 +41,18 @@
     <div class="two-col">
       <div class="panel">
         <div class="panel-head"><h2>Revenue vs expenses</h2><span class="meta">By month</span></div>
-        <canvas id="revenue-chart" height="220"></canvas>
+        <div class="chart-box"><canvas id="revenue-chart"></canvas></div>
       </div>
       <div class="panel">
         <div class="panel-head"><h2>Resource consumption</h2></div>
-        <canvas id="resource-chart" height="220"></canvas>
+        <div class="chart-box"><canvas id="resource-chart"></canvas></div>
       </div>
     </div>
 
     <div class="two-col">
       <div class="panel">
         <div class="panel-head"><h2>Infrastructure projects</h2></div>
-        <canvas id="projects-chart" height="200"></canvas>
+        <div class="chart-box"><canvas id="projects-chart"></canvas></div>
       </div>
       <div class="panel">
         <div class="panel-head"><h2>School at a glance</h2></div>
@@ -59,6 +63,7 @@
 
   <aside class="right-rail">
     <div class="profile-row">
+      <button class="theme-btn" id="theme-toggle" title="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
       <div class="bell"><i class="fa-solid fa-bell"></i></div>
       <div class="who"><div class="name" id="who-name">—</div><div class="role" id="who-role">—</div></div>
       <div class="avatar" id="avatar">–</div>
